@@ -9,12 +9,9 @@
 import Foundation
 
 struct PassBooth {
-    func assignPass(to entrant: Entrant) {
-        var entrant = entrant
+    static func assignPass(to entrant: inout Entrant) {
         
-        if entrant.isValidEntrant() {
-            entrant.accessPass = Pass(for: entrant)
-        }
+        entrant.accessPass = Pass(for: entrant)
         
         if let pass = entrant.accessPass {
             print(pass)

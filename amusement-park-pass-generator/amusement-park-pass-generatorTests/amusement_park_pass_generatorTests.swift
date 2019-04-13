@@ -226,7 +226,7 @@ class amusement_park_pass_generatorTests: XCTestCase {
         sleep(3)
 
         let secondRideAccess = guest.swipePassAtRide()
-        XCTAssertTrue(SwipeController.hasEntrantSwipedDouble(entrant: guest))
+        XCTAssertTrue(SwipeTracker.hasEntrantSwipedDouble(entrant: guest))
         XCTAssertNil(secondRideAccess, "Access before 5 seconds from the 1st access should not be allowed (return nil)")
     }
     
@@ -240,7 +240,7 @@ class amusement_park_pass_generatorTests: XCTestCase {
         sleep(10)
         
         let secondRideAccess = guest.swipePassAtRide()
-        XCTAssertFalse(SwipeController.hasEntrantSwipedDouble(entrant: guest))
+        XCTAssertFalse(SwipeTracker.hasEntrantSwipedDouble(entrant: guest))
         XCTAssertEqual(secondRideAccess, [.accessAllRides], "Second access is allowed because is after 5 seconds")
     }
     

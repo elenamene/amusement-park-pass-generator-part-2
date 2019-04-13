@@ -15,17 +15,6 @@ protocol Nameable {
     var lastName: String { get }
 }
 
-extension Nameable {
-    func hasValidName() throws {
-        guard !self.firstName.isEmpty else {
-            throw EntrantError.invalidFirstName
-        }
-        guard !self.lastName.isEmpty else {
-            throw EntrantError.invalidLastName
-        }
-    }
-}
-
 // MARK: - Addressable
 
 struct Address {
@@ -39,23 +28,6 @@ protocol Addressable {
     var address: Address { get }
 }
 
-extension Addressable {
-    func hasValidAddress() throws {
-        guard !self.address.city.isEmpty else {
-            throw EntrantError.invalidCity
-        }
-        guard !self.address.state.isEmpty else {
-            throw EntrantError.invalidState
-        }
-        guard !self.address.streetAddress.isEmpty else {
-            throw EntrantError.invalidStreetAddress
-        }
-        guard !self.address.zipCode.isEmpty else {
-            throw EntrantError.invalidZipCode
-        }
-    }
-}
-
 // MARK: - Ageable
 
 protocol Ageable {
@@ -63,19 +35,6 @@ protocol Ageable {
 }
 
 extension Ageable {
-    func hasValidDateOfBirth() throws {
-        guard self.dateOfBirth != nil else {
-            throw EntrantError.invalidDateOfBirth
-        }
-        
-        if let entrant = self as? FreeChildGuest, let dateOfBirth = entrant.dateOfBirth, let age = dateOfBirth.age {
-            if age >= 5 {
-                throw EntrantError.invalidAge
-            }
-        }
-        
-    }
-    
     func isTodayBirthday() -> Bool {
         if let dateOfBirth = self.dateOfBirth, dateOfBirth.isSameDayAndMonthOfToday() {
             return true
@@ -91,10 +50,15 @@ protocol SSNIdentifiable {
     var socialSecurityNumber: String { get }
 }
 
-extension SSNIdentifiable {
-    func hasValidSSN() throws {
-        guard !self.socialSecurityNumber.isEmpty else {
-            throw EntrantError.invalidSocialSecurityNumber
-        }
-    }
+// MARK: - ProjectIdentifiable
+
+protocol ProjectIdentifiable {
+    var projectNumber: ProjectNumber { get }
+}
+
+// MARK: - VendorTrackable
+
+protocol VendorTrackable {
+    var company: VendorCompany { get }
+    var dateOfVisit: Date { get set }
 }

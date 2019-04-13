@@ -11,9 +11,18 @@
 		F323C3712243B611004CFBBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F323C3702243B611004CFBBA /* Main.storyboard */; };
 		F323C3732243B621004CFBBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F323C3722243B621004CFBBA /* LaunchScreen.storyboard */; };
 		F32718F42247BD27002FFE77 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32718F32247BD27002FFE77 /* Message.swift */; };
-		F369A3A8224654E8004413F9 /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F369A3A7224654E8004413F9 /* SwipeController.swift */; };
+		F32B8758225A35110013B13A /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32B8757225A35110013B13A /* UITextField.swift */; };
+		F32B875A225B63330013B13A /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32B8759225B63330013B13A /* UIStackView.swift */; };
+		F32B875C225B7D090013B13A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32B875B225B7D090013B13A /* UIColor.swift */; };
+		F35785FA224CBD7C004AB118 /* Vendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35785F9224CBD7C004AB118 /* Vendor.swift */; };
+		F35A660A225F9E0B0012F3B5 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35A6609225F9E0B0012F3B5 /* Sequence.swift */; };
+		F35A660E2260A4440012F3B5 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35A660D2260A4440012F3B5 /* PassViewController.swift */; };
+		F369A3A8224654E8004413F9 /* SwipeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F369A3A7224654E8004413F9 /* SwipeTracker.swift */; };
+		F38F4BD1224E8DD500C62046 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F4BD0224E8DD500C62046 /* InputValidator.swift */; };
+		F38F4BD3224F9EBF00C62046 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F4BD2224F9EBF00C62046 /* String.swift */; };
+		F3D254BA225262B0002A4FF3 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D254B9225262B0002A4FF3 /* UIButton.swift */; };
+		F3DDDD2F225DD1C600B3058E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDDD2E225DD1C600B3058E /* ViewController.swift */; };
 		F3E0DD902243AE4400665DBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DD8F2243AE4400665DBF /* AppDelegate.swift */; };
-		F3E0DD922243AE4400665DBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DD912243AE4400665DBF /* ViewController.swift */; };
 		F3E0DD972243AE4500665DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E0DD962243AE4500665DBF /* Assets.xcassets */; };
 		F3E0DDA52243AE4500665DBF /* amusement_park_pass_generatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDA42243AE4500665DBF /* amusement_park_pass_generatorTests.swift */; };
 		F3E0DDB02243AE4500665DBF /* amusement_park_pass_generatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDAF2243AE4500665DBF /* amusement_park_pass_generatorUITests.swift */; };
@@ -21,7 +30,7 @@
 		F3E0DDCC2243AFA900665DBF /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC12243AFA800665DBF /* Employee.swift */; };
 		F3E0DDCD2243AFA900665DBF /* RideAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC22243AFA800665DBF /* RideAccess.swift */; };
 		F3E0DDCE2243AFA900665DBF /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC32243AFA800665DBF /* Guest.swift */; };
-		F3E0DDCF2243AFA900665DBF /* EntrantError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC42243AFA800665DBF /* EntrantError.swift */; };
+		F3E0DDCF2243AFA900665DBF /* FormValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC42243AFA800665DBF /* FormValidation.swift */; };
 		F3E0DDD02243AFA900665DBF /* ParkArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC52243AFA800665DBF /* ParkArea.swift */; };
 		F3E0DDD12243AFA900665DBF /* PersonalnformationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC62243AFA800665DBF /* PersonalnformationsProtocols.swift */; };
 		F3E0DDD22243AFA900665DBF /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E0DDC72243AFA800665DBF /* Pass.swift */; };
@@ -51,10 +60,19 @@
 		F323C3702243B611004CFBBA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F323C3722243B621004CFBBA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F32718F32247BD27002FFE77 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		F369A3A7224654E8004413F9 /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
+		F32B8757225A35110013B13A /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		F32B8759225B63330013B13A /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		F32B875B225B7D090013B13A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		F35785F9224CBD7C004AB118 /* Vendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor.swift; sourceTree = "<group>"; };
+		F35A6609225F9E0B0012F3B5 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		F35A660D2260A4440012F3B5 /* PassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
+		F369A3A7224654E8004413F9 /* SwipeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTracker.swift; sourceTree = "<group>"; };
+		F38F4BD0224E8DD500C62046 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
+		F38F4BD2224F9EBF00C62046 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		F3D254B9225262B0002A4FF3 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		F3DDDD2E225DD1C600B3058E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F3E0DD8C2243AE4400665DBF /* amusement-park-pass-generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amusement-park-pass-generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E0DD8F2243AE4400665DBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F3E0DD912243AE4400665DBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F3E0DD962243AE4500665DBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3E0DD9B2243AE4500665DBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3E0DDA02243AE4500665DBF /* amusement-park-pass-generatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amusement-park-pass-generatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +85,7 @@
 		F3E0DDC12243AFA800665DBF /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		F3E0DDC22243AFA800665DBF /* RideAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideAccess.swift; sourceTree = "<group>"; };
 		F3E0DDC32243AFA800665DBF /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
-		F3E0DDC42243AFA800665DBF /* EntrantError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantError.swift; sourceTree = "<group>"; };
+		F3E0DDC42243AFA800665DBF /* FormValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidation.swift; sourceTree = "<group>"; };
 		F3E0DDC52243AFA800665DBF /* ParkArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkArea.swift; sourceTree = "<group>"; };
 		F3E0DDC62243AFA800665DBF /* PersonalnformationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalnformationsProtocols.swift; sourceTree = "<group>"; };
 		F3E0DDC72243AFA800665DBF /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
@@ -104,12 +122,35 @@
 			isa = PBXGroup;
 			children = (
 				F3E0DDC62243AFA800665DBF /* PersonalnformationsProtocols.swift */,
-				F3E0DDC42243AFA800665DBF /* EntrantError.swift */,
 				F3E0DDC92243AFA800665DBF /* Entrant.swift */,
-				F3E0DDC12243AFA800665DBF /* Employee.swift */,
 				F3E0DDC32243AFA800665DBF /* Guest.swift */,
+				F3E0DDC12243AFA800665DBF /* Employee.swift */,
+				F35785F9224CBD7C004AB118 /* Vendor.swift */,
 			);
 			path = Entrants;
+			sourceTree = "<group>";
+		};
+		F38F4BD4224F9EE800C62046 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				F38F4BD0224E8DD500C62046 /* InputValidator.swift */,
+				F3E0DDC42243AFA800665DBF /* FormValidation.swift */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
+		F38F4BD5224F9EFE00C62046 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F314C6872243E3ED00ED1C78 /* Date.swift */,
+				F38F4BD2224F9EBF00C62046 /* String.swift */,
+				F3D254B9225262B0002A4FF3 /* UIButton.swift */,
+				F32B8757225A35110013B13A /* UITextField.swift */,
+				F32B8759225B63330013B13A /* UIStackView.swift */,
+				F32B875B225B7D090013B13A /* UIColor.swift */,
+				F35A6609225F9E0B0012F3B5 /* Sequence.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F3E0DD832243AE4400665DBF = {
@@ -136,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				F3E0DDBD2243AE7000665DBF /* Models */,
-				F3E0DDBF2243AE8800665DBF /* Controllers */,
 				F3E0DDBE2243AE7800665DBF /* View */,
+				F3E0DDBF2243AE8800665DBF /* Controllers */,
 				F3E0DD9B2243AE4500665DBF /* Info.plist */,
 			);
 			path = "amusement-park-pass-generator";
@@ -164,6 +205,7 @@
 		F3E0DDBD2243AE7000665DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F38F4BD4224F9EE800C62046 /* Validation */,
 				F369A3A62244EE0A004413F9 /* Entrants */,
 				F3E0DDC52243AFA800665DBF /* ParkArea.swift */,
 				F3E0DDC22243AFA800665DBF /* RideAccess.swift */,
@@ -171,8 +213,8 @@
 				F3E0DDC72243AFA800665DBF /* Pass.swift */,
 				F3E0DDCA2243AFA800665DBF /* PassBooth.swift */,
 				F32718F32247BD27002FFE77 /* Message.swift */,
-				F369A3A7224654E8004413F9 /* SwipeController.swift */,
-				F314C6872243E3ED00ED1C78 /* Date.swift */,
+				F369A3A7224654E8004413F9 /* SwipeTracker.swift */,
+				F38F4BD5224F9EFE00C62046 /* Extensions */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,8 +232,9 @@
 		F3E0DDBF2243AE8800665DBF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F3DDDD2E225DD1C600B3058E /* ViewController.swift */,
+				F35A660D2260A4440012F3B5 /* PassViewController.swift */,
 				F3E0DD8F2243AE4400665DBF /* AppDelegate.swift */,
-				F3E0DD912243AE4400665DBF /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -264,13 +307,16 @@
 				TargetAttributes = {
 					F3E0DD8B2243AE4400665DBF = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					F3E0DD9F2243AE4500665DBF = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = F3E0DD8B2243AE4400665DBF;
 					};
 					F3E0DDAA2243AE4500665DBF = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = F3E0DD8B2243AE4400665DBF;
 					};
 				};
@@ -328,16 +374,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3E0DDD42243AFA900665DBF /* Entrant.swift in Sources */,
-				F3E0DD922243AE4400665DBF /* ViewController.swift in Sources */,
 				F3E0DDCD2243AFA900665DBF /* RideAccess.swift in Sources */,
+				F32B8758225A35110013B13A /* UITextField.swift in Sources */,
 				F3E0DDCE2243AFA900665DBF /* Guest.swift in Sources */,
+				F3DDDD2F225DD1C600B3058E /* ViewController.swift in Sources */,
 				F3E0DDD52243AFA900665DBF /* PassBooth.swift in Sources */,
+				F35785FA224CBD7C004AB118 /* Vendor.swift in Sources */,
+				F35A660A225F9E0B0012F3B5 /* Sequence.swift in Sources */,
+				F32B875C225B7D090013B13A /* UIColor.swift in Sources */,
+				F35A660E2260A4440012F3B5 /* PassViewController.swift in Sources */,
+				F3D254BA225262B0002A4FF3 /* UIButton.swift in Sources */,
 				F3E0DDD02243AFA900665DBF /* ParkArea.swift in Sources */,
-				F369A3A8224654E8004413F9 /* SwipeController.swift in Sources */,
+				F369A3A8224654E8004413F9 /* SwipeTracker.swift in Sources */,
 				F3E0DDCC2243AFA900665DBF /* Employee.swift in Sources */,
-				F3E0DDCF2243AFA900665DBF /* EntrantError.swift in Sources */,
+				F3E0DDCF2243AFA900665DBF /* FormValidation.swift in Sources */,
 				F3E0DDD12243AFA900665DBF /* PersonalnformationsProtocols.swift in Sources */,
 				F3E0DD902243AE4400665DBF /* AppDelegate.swift in Sources */,
+				F38F4BD3224F9EBF00C62046 /* String.swift in Sources */,
+				F38F4BD1224E8DD500C62046 /* InputValidator.swift in Sources */,
+				F32B875A225B63330013B13A /* UIStackView.swift in Sources */,
 				F3E0DDD22243AFA900665DBF /* Pass.swift in Sources */,
 				F32718F42247BD27002FFE77 /* Message.swift in Sources */,
 				F314C6882243E3ED00ED1C78 /* Date.swift in Sources */,
@@ -506,8 +561,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -524,8 +579,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -544,7 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generatorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amusement-park-pass-generator.app/amusement-park-pass-generator";
 			};
@@ -565,7 +620,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generatorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amusement-park-pass-generator.app/amusement-park-pass-generator";
 			};
@@ -585,7 +640,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generatorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "amusement-park-pass-generator";
 			};
@@ -605,7 +660,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "elenameneghini.com.amusement-park-pass-generatorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "amusement-park-pass-generator";
 			};

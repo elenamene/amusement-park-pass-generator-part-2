@@ -8,49 +8,30 @@
 
 import Foundation
 
-// MARK: - Entrant
+// MARK: - EntrantType
 
 enum EntrantType: String {
     case classicGuest = "Classic Guest"
     case vipGuest = "VIP Guest"
     case freeChildGuest = "Free Child Guest"
+    case seasonPassGuest = "Season Pass Guest"
+    case seniorGuest = "Senior Guest"
     case hourlyEmployeeFoodServices = "Hourly Employee - Food Services"
     case hourlyEmployeeRideServices = "Hourly Employee - Ride Services"
     case hourlyEmployeeMaintenance = "Hourly Employee - Maintenance"
-    case manager = "Manager"
+    case shiftManager = "Shift Manager"
+    case generalManager = "General Manager"
+    case seniorManager = "Senior Manager"
+    case contractor  = "Contractor"
+    case vendor = "Vendor"
 }
+
+// MARK: - Entrant
 
 protocol Entrant {
     var entrantType: EntrantType { get }
     var accessPass: Pass? { get set }
-}
-
-// MARK: - Entrant Validation
-
-extension Entrant {
-    func isValidEntrant() -> Bool {
-        do {
-            if let entrant = self as? Nameable {
-                try entrant.hasValidName()
-            }
-            if let entrant = self as? Addressable {
-                try entrant.hasValidAddress()
-            }
-            if let entrant = self as? Ageable {
-                try entrant.hasValidDateOfBirth()
-            }
-            if let entrant = self as? SSNIdentifiable {
-                try entrant.hasValidSSN()
-            }
-        } catch let error as EntrantError {
-            print(error.rawValue)
-            return false
-        } catch {
-            fatalError("Unexpected error: \(error).")
-        }
-        
-        return true
-    }
+    var areasPermitted: [ParkArea] { get }
 }
 
 // MARK: - Entrant Swipe Methods
@@ -87,7 +68,7 @@ extension Entrant {
         }
         
         // Check for double swiping
-        if SwipeController.hasEntrantSwipedDouble(entrant: self) {
+        if SwipeTracker.hasEntrantSwipedDouble(entrant: self) {
             print(Message.doubleSwiping(self).text)
             return nil
         }

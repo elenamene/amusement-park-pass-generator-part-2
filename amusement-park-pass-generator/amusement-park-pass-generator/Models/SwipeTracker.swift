@@ -1,5 +1,5 @@
 //
-//  SwipeControl.swift
+//  SwipeTracker.swift
 //  amusement-park-pass-generator
 //
 //  Created by Elena Meneghini on 23/03/2019.
@@ -8,7 +8,16 @@
 
 import Foundation
 
-struct SwipeController {
+//
+//    func isTodayBirthday() -> Bool {
+//        if let dateOfBirth = self.dateOfBirth, dateOfBirth.isSameDayAndMonthOfToday() {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+
+struct SwipeTracker {
     static func hasEntrantSwipedDouble(entrant: Entrant) -> Bool {
         let currentSwipeTime = Date()
         
