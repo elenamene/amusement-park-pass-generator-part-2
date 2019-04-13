@@ -33,3 +33,7 @@ Passes need to be tested for rules such as:
 * Add additional input validation to ensure that phone numbers and zip codes are all numerical, birthday is of the correct format (MM/DD/YYYY) and that all text entries are of “reasonable” length. You can decide what you deem reasonable, and put it in the relevant comment in the code. You will only be graded on the implementation. An alert needs to be generated to notify the user that there is an invalid input.
 
 * Add a feature to the swipe method(s), so that a “ding” sound is played when an entrant is granted access and a “buzz” sound is played when an entrant is denied access.
+
+### Personal Enhancements
+
+* Adaptive UI for both portrait and landscape mode
