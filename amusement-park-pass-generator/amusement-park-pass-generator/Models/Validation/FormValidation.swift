@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum EntrantError: String, Error {
+enum FormError: String, Error {
     case invalidFirstName = "Please insert your first name."
     case invalidLastName = "Please insert your last name."
     case invalidStreetAddress = "Please insert your address."
@@ -23,53 +23,55 @@ enum EntrantError: String, Error {
 }
 
 struct FormValidation {
-    static let validator = InputValidator()
+    static let zipRegex = "(^[0-9]{5}(-[87)?$)"
+    static let streetRegex = #"\d{1,4} [\w\s]{1,20}(?:street|st|avenue|ave|road|rd|highway|hwy|lane|square|sq|trail|trl|drive|dr|court|ct|park|parkway|pkwy|circle|cir|boulevard|blvd)\W?"#
+    static let ssnRegex = "^\\d{3}-\\d{2}-\\d{4}$"
+
     
     static func firstName(_ input: String) throws -> String {
-        guard validator.isNameValidLength(input) else {
-            throw EntrantError.invalidFirstName
+        guard input.isLengthEqualOrGreaterThan(3) else {
+            throw FormError.invalidFirstName
         }
         
         return input
     }
     
     static func lastName(_ input: String) throws -> String {
-        guard validator.isNameValidLength(input) else {
-            throw EntrantError.invalidLastName
+        guard input.isLengthEqualOrGreaterThan(3) else {
+            throw FormError.invalidLastName
         }
         
         return input
     }
 
     static func address(_ address: Address) throws -> Address {
-        guard validator.isNameValidLength(address.city) else {
-            throw EntrantError.invalidCity
+        guard address.city.isLengthEqualOrGreaterThan(3) else {
+            throw FormError.invalidCity
         }
-        guard validator.isNameValidLength(address.state) else {
-            throw EntrantError.invalidState
+        guard address.state.isLengthEqualOrGreaterThan(3) else {
+            throw FormError.invalidState
         }
-        guard validator.isStreetAddressValid(address.streetAddress) else {
-            throw EntrantError.invalidStreetAddress
+        guard address.streetAddress.isValidFormat(regex: streetRegex) else {
+            throw FormError.invalidStreetAddress
         }
-        guard validator.isZipCodeValid(address.zipCode) else {
-            throw EntrantError.invalidZipCode
+        guard address.zipCode.isValidFormat(regex: zipRegex) else {
+            throw FormError.invalidZipCode
         }
 
         return Address(streetAddress: address.streetAddress, city: address.city, state: address.state, zipCode: address.zipCode)
     }
     
     static func date(_ input: String) throws -> Date {
-        guard validator.isDateFormatValid(input), let date = input.getDate else {
-            throw EntrantError.invalidDateOfBirth
+        guard let date = input.getDate else {
+            throw FormError.invalidDateOfBirth
         }
-        
         return date
     }
     
     
     static func ssn(_ input: String) throws -> String {
-        guard validator.isSSNValid(input) else {
-            throw EntrantError.invalidSocialSecurityNumber
+        guard input.isValidFormat(regex: ssnRegex) else {
+            throw FormError.invalidSocialSecurityNumber
         }
         
         return input
@@ -77,7 +79,7 @@ struct FormValidation {
        
     static func projectNumber(_ input: String) throws -> ProjectNumber {
         guard let number = Int(input), let projectNumber = ProjectNumber(rawValue: number) else {
-            throw EntrantError.invalidProjectNumber
+            throw FormError.invalidProjectNumber
         }
         
         return projectNumber
@@ -85,7 +87,7 @@ struct FormValidation {
 
     static func companyName(_ input: String) throws -> VendorCompany {
         guard let name = VendorCompany(rawValue: input.lowercased()) else {
-            throw EntrantError.invalidProjectNumber
+            throw FormError.invalidProjectNumber
         }
         
         return name

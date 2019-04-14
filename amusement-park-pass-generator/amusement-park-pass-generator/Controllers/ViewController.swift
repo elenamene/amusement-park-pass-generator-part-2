@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var subMenuPurpleView: UIView!
+    @IBOutlet weak var buttonsBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var sectionsWhiteSpaceConstraints: [NSLayoutConstraint]!
     
     // Buttons Outlets
     @IBOutlet weak var vendorButton: UIButton!
@@ -47,6 +49,14 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(ViewController.dateChanged(datePicker:)), for: .valueChanged)
+        
+        return datePicker
+    }()
+    
     var subMenuButtonsCollection: [UIButton] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,6 +64,8 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Properties
+    
+    let fakeData = FakeDataProvider()
     
     lazy var namebleTextFields: [UITextField] = [firstNameTextField, lastNameTextField]
     lazy var ageableTextFields: [UITextField] = [dateOfBirthTextField]
@@ -96,6 +108,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setNeedsStatusBarAppearanceUpdate()
+        dateOfBirthTextField.inputView = datePicker
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapGesture(recognizer:)))
+        view.addGestureRecognizer(tapGesture)
         
         vendorButton.addTarget(self, action: #selector(selectEntrantType), for: .touchUpInside)
         contractorButton.addTarget(self, action: #selector(selectEntrantType), for: .touchUpInside)
@@ -103,6 +119,10 @@ class ViewController: UIViewController {
         textFieldsCollection.disableAll()
         generatePassButton.isEnabled = false
         populateDataButton.isEnabled = false
+        
+        // Observers
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -113,13 +133,6 @@ class ViewController: UIViewController {
             buttonsStackView.centerYAnchor.constraint(equalTo: subMenuPurpleView.centerYAnchor)
             ])
     }
-    
-    // MARK: - Form
-    
-    // Helper method to enable different collections of text fields
-//    func enableTextFields(_ collection: [UITextField]...) {
-//        collection.forEach { $0.forEach { $0.isEnabled = true } }
-//    }
     
     // MARK: - Buttons
     
@@ -138,7 +151,7 @@ class ViewController: UIViewController {
     // MARK: - Entrant
     
     // Create an entrant
-    func createEntrant(ofType type: EntrantType) -> Entrant? {
+    func entrant(ofType type: EntrantType) -> Entrant? {
         guard let firstName = firstNameTextField.text,
             let lastName = lastNameTextField.text,
             let streetAddress = streetAddressTextField.text,
@@ -170,10 +183,10 @@ class ViewController: UIViewController {
             case .contractor: return try Contractor(firstName: firstName, lastName: lastName, address: address, dateOfBirth: dob, socialSecurityNumber: ssn, projectNumber: projectNumber)
             case .vendor: return try Vendor(firstName: firstName, lastName: lastName, dateOfBirth: dob, company: companyName, dateOfVisit: dob)
             }
-        } catch let error as EntrantError {
+        } catch let error as FormError {
             print(error.rawValue)
             
-            let alertController = UIAlertController(title: "Invalid Field", message: error.rawValue, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Invalid Information", message: error.rawValue, preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)
             
@@ -189,7 +202,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "generatePass" {
-            if var entrant = createEntrant(ofType: selectedType) {
+            if var entrant = entrant(ofType: selectedType) {
                 PassBooth.assignPass(to: &entrant)
                 
                 guard let passViewController = segue.destination as? PassViewController else { return }
@@ -199,6 +212,14 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Actions
+    
+    @objc func backgroundTapGesture(recognizer: UITapGestureRecognizer) {
+        dateOfBirthTextField.resignFirstResponder()
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        dateOfBirthTextField.text = datePicker.date.stringDate
+    }
     
     @objc func selectEntrantType(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
@@ -253,8 +274,78 @@ class ViewController: UIViewController {
     }
     
     @IBAction func populateData(_ sender: UIButton) {
-        // Populate data
+        for textField in textFieldsCollection {
+            switch textField {
+            case firstNameTextField: firstNameTextField.text = fakeData.firstName()
+            case lastNameTextField: lastNameTextField.text = fakeData.lastName()
+            case dateOfBirthTextField: dateOfBirthTextField.text = fakeData.date()
+            case ssnTextField: ssnTextField.text = fakeData.ssn()
+            case projectNumberTextFIeld: projectNumberTextFIeld.text = fakeData.projectNumber()
+            case companyTextField: companyTextField.text = fakeData.company()
+            case streetAddressTextField: streetAddressTextField.text = fakeData.address()?.streetAddress
+            case cityTextField: cityTextField.text = fakeData.address()?.city
+            case stateTextField: stateTextField.text = fakeData.address()?.state
+            case zipCodeTextField: zipCodeTextField.text = fakeData.address()?.zipCode
+            default: break
+            }
+        }
     }
     
 }
 
+// MARK: - Conform to Textfield Delegate
+
+extension ViewController: UITextFieldDelegate {
+    // Get rid of the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Dismiss keyboard
+        // -> make the next text field the first responder
+        // with for-in loop array?
+//        switch textField {
+//        case firstNameTextField:
+//            lastNameTextField.becomeFirstResponder()
+//        case lastNameTextField:
+//            passwordTextField.becomeFirstResponder()
+//        case passwordTextField:
+//            emailTextField.becomeFirstResponder()
+//        default:
+//            emailTextField.resignFirstResponder()
+//        }
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
+// MARK: - Keyboard Notifications
+
+extension ViewController {
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let info = notification.userInfo,
+            let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let frame = keyboardFrame.cgRectValue
+            buttonsBottomConstraint.constant = frame.size.height + 40
+            
+            sectionsWhiteSpaceConstraints.forEach() {
+                $0.constant = 24
+            }
+            
+            UIView.animate(withDuration: 0.8) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        buttonsBottomConstraint.constant = 64
+        
+        sectionsWhiteSpaceConstraints.forEach() {
+            $0.constant = 32
+        }
+        
+        UIView.animate(withDuration: 0.8) {
+            self.view.layoutIfNeeded()
+        }
+    }
+}

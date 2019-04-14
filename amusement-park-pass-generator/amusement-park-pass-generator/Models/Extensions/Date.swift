@@ -28,5 +28,12 @@ extension Date {
         let today = Date()
         return self.day == today.day && self.month == today.month
     }
+    
+    var stringDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        return dateFormatter.string(from: self)
+    }
 }
 

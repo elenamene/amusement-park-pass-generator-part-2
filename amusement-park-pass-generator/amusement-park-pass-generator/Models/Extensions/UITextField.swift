@@ -12,7 +12,8 @@ import UIKit
 extension UITextField {
     override open var isEnabled: Bool {
         didSet {
-             alpha = isEnabled ? 1.0 : 0.2
+            alpha = isEnabled ? 1.0 : 0.2
+            text = ""
         }
     }
 }

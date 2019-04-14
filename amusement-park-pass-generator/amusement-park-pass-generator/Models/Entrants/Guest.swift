@@ -52,7 +52,7 @@ class FreeChildGuest: Guest, Ageable {
         
         if let age = self.dateOfBirth?.age {
             if age >= 5 {
-                throw EntrantError.invalidAge
+                throw FormError.invalidAge
             }
         }
     }

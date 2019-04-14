@@ -16,3 +16,18 @@ extension String {
         return dateFormatter.date(from: self)
     }
 }
+
+// Validation
+
+extension String {
+    func isLengthEqualOrGreaterThan(_ minLength: Int) -> Bool {
+        return self.count >= minLength
+    }
+    
+    func isValidFormat(regex: String) -> Bool {
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: self.lowercased())
+    }
+    
+}
+
+
