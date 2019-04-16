@@ -37,13 +37,11 @@ class ClassicGuest: Guest {
 
 class VIPGuest: Guest {
     var entrantType: EntrantType = .vipGuest
-//    var type: GuestType = .vip // do I need this?
     var accessPass: Pass?
 }
 
 class FreeChildGuest: Guest, Ageable {
     var entrantType: EntrantType = .freeChildGuest
-//    var type: GuestType = .freeChild // do I need this?
     var dateOfBirth: Date?
     var accessPass: Pass?
     
@@ -60,7 +58,6 @@ class FreeChildGuest: Guest, Ageable {
 
 class SeasonPassGuest: Guest, Nameable, Addressable, Ageable {
     var entrantType: EntrantType = .seasonPassGuest
-//    var type: GuestType = .seasonPass
     var firstName: String
     var lastName: String
     var address: Address

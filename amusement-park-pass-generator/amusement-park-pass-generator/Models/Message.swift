@@ -34,7 +34,6 @@ extension Message {
         Happy birthday \(name)!
         From all of us wishing you nothing but fulfilment and happiness on this special day!
         Enjoy your free afternoon.
-        All the best.
         """
     }
     

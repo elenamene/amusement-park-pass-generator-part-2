@@ -37,25 +37,6 @@ protocol Entrant {
 
 // MARK: - Entrant Swipe Methods
 
-enum AccessValidation: String {
-    case pass = "Access Permitted"
-    case fail = "Access Denied"
-    
-    func color() -> UIColor {
-        switch self {
-        case .pass: return UIColor.myGreen
-        case .fail: return UIColor.myRed
-        }
-    }
-    
-    func soundName() -> (String) {
-        switch self {
-        case .pass: return "AccessGranted"
-        case .fail: return "AccessDenied"
-        }
-    }
-}
-
 extension Entrant {
     func swipePass(atRestrictedArea area: ParkArea) -> (validation: AccessValidation, isBirthday: Bool?) {
         let isBirthday: Bool

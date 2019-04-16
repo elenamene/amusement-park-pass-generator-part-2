@@ -22,6 +22,7 @@
 		F35A660A225F9E0B0012F3B5 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35A6609225F9E0B0012F3B5 /* Sequence.swift */; };
 		F35A660E2260A4440012F3B5 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35A660D2260A4440012F3B5 /* PassViewController.swift */; };
 		F369A3A8224654E8004413F9 /* SwipeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F369A3A7224654E8004413F9 /* SwipeTracker.swift */; };
+		F385A8212266024200002774 /* AccessValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F385A8202266024200002774 /* AccessValidation.swift */; };
 		F38F4BD3224F9EBF00C62046 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F4BD2224F9EBF00C62046 /* String.swift */; };
 		F3D254BA225262B0002A4FF3 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D254B9225262B0002A4FF3 /* UIButton.swift */; };
 		F3DDDD2F225DD1C600B3058E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDDD2E225DD1C600B3058E /* ViewController.swift */; };
@@ -74,6 +75,7 @@
 		F35A6609225F9E0B0012F3B5 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		F35A660D2260A4440012F3B5 /* PassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
 		F369A3A7224654E8004413F9 /* SwipeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTracker.swift; sourceTree = "<group>"; };
+		F385A8202266024200002774 /* AccessValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessValidation.swift; sourceTree = "<group>"; };
 		F38F4BD2224F9EBF00C62046 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		F3D254B9225262B0002A4FF3 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		F3DDDD2E225DD1C600B3058E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				F3E0DDC62243AFA800665DBF /* PersonalnformationsProtocols.swift */,
+				F385A8202266024200002774 /* AccessValidation.swift */,
 				F3E0DDC92243AFA800665DBF /* Entrant.swift */,
 				F3E0DDC32243AFA800665DBF /* Guest.swift */,
 				F3E0DDC12243AFA800665DBF /* Employee.swift */,
@@ -157,13 +160,13 @@
 			path = Entrants;
 			sourceTree = "<group>";
 		};
-		F38F4BD4224F9EE800C62046 /* Validation */ = {
+		F38F4BD4224F9EE800C62046 /* Form */ = {
 			isa = PBXGroup;
 			children = (
 				F3E0DDC42243AFA800665DBF /* FormValidation.swift */,
 				F3038DBA2263497300EEE988 /* FakeDataProvider.swift */,
 			);
-			path = Validation;
+			path = Form;
 			sourceTree = "<group>";
 		};
 		F38F4BD5224F9EFE00C62046 /* Extensions */ = {
@@ -235,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				F31A2B812265D4A900617708 /* Park */,
-				F38F4BD4224F9EE800C62046 /* Validation */,
+				F38F4BD4224F9EE800C62046 /* Form */,
 				F369A3A62244EE0A004413F9 /* Entrants */,
 				F32718F32247BD27002FFE77 /* Message.swift */,
 				F369A3A7224654E8004413F9 /* SwipeTracker.swift */,
@@ -418,6 +421,7 @@
 				F3E0DDCF2243AFA900665DBF /* FormValidation.swift in Sources */,
 				F3E0DDD12243AFA900665DBF /* PersonalnformationsProtocols.swift in Sources */,
 				F3E0DD902243AE4400665DBF /* AppDelegate.swift in Sources */,
+				F385A8212266024200002774 /* AccessValidation.swift in Sources */,
 				F38F4BD3224F9EBF00C62046 /* String.swift in Sources */,
 				F3038DBB2263497300EEE988 /* FakeDataProvider.swift in Sources */,
 				F32B875A225B63330013B13A /* UIStackView.swift in Sources */,

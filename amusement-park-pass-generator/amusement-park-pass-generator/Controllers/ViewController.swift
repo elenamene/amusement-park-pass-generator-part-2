@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var ssnTextField: UITextField!
-    @IBOutlet weak var projectNumberTextFIeld: UITextField!
+    @IBOutlet weak var projectNumberTextField: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var companyTextField: UITextField!
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     lazy var ageableTextFields: [UITextField] = [dateOfBirthTextField]
     lazy var addressableTextFields: [UITextField] = [streetAddressTextField, cityTextField, stateTextField, zipCodeTextField]
     lazy var ssnIdentifiableTextFields: [UITextField] = [ssnTextField]
-    lazy var projectIdentifiableTextFields: [UITextField] = [projectNumberTextFIeld]
+    lazy var projectIdentifiableTextFields: [UITextField] = [projectNumberTextField]
     lazy var vendorTrackableTextFields: [UITextField] = [companyTextField]
     
     var selectedType: EntrantType = .classicGuest {
@@ -92,10 +92,12 @@ class ViewController: UIViewController {
             
             textFieldsCollection.enableAll()
             
+            // Enable the populate data button whenever there are textfields
             if !textFieldsCollection.isEmpty {
                 populateDataButton.isEnabled = true
             }
             
+            // Enable generate pass button when there are no text fields
             if self.selectedType == .classicGuest || self.selectedType == .vipGuest {
                 generatePassButton.isEnabled = true
             }
@@ -110,9 +112,11 @@ class ViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
         dateOfBirthTextField.inputView = datePicker
         
+        // Add Tap Gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapGesture(recognizer:)))
         view.addGestureRecognizer(tapGesture)
         
+        // Add target methods
         vendorButton.addTarget(self, action: #selector(selectEntrantType), for: .touchUpInside)
         contractorButton.addTarget(self, action: #selector(selectEntrantType), for: .touchUpInside)
         
@@ -143,6 +147,7 @@ class ViewController: UIViewController {
         
         button.addTarget(self, action: #selector(selectEntrantType), for: .touchUpInside)
         
+        // Add buttons to stack view
         subMenuButtonsCollection.append(button)
         buttonsStackView.addArrangedSubview(button)
         }
@@ -161,7 +166,7 @@ class ViewController: UIViewController {
             let dob = dateOfBirthTextField.text,
             let ssn = ssnTextField.text,
             let companyName = companyTextField.text,
-            let projectNumber = projectNumberTextFIeld.text
+            let projectNumber = projectNumberTextField.text
             else { return nil }
         
         let address = Address(streetAddress: streetAddress, city: city, state: state, zipCode: zipCode)
@@ -272,7 +277,7 @@ class ViewController: UIViewController {
         populateDataButton.isEnabled = false
         generatePassButton.isEnabled = false
         
-        // Create new button for stack view
+        // Create new buttons for stack view
         switch title {
         case "Guest": createButtons(for: GuestType.allCases)
         case "Employee": createButtons(for: ServiceType.allCases)
@@ -288,7 +293,7 @@ class ViewController: UIViewController {
             case lastNameTextField: lastNameTextField.text = fakeData.lastName()
             case dateOfBirthTextField: dateOfBirthTextField.text = fakeData.date()
             case ssnTextField: ssnTextField.text = fakeData.ssn()
-            case projectNumberTextFIeld: projectNumberTextFIeld.text = fakeData.projectNumber()
+            case projectNumberTextField: projectNumberTextField.text = fakeData.projectNumber()
             case companyTextField: companyTextField.text = fakeData.company()
             case streetAddressTextField: streetAddressTextField.text = fakeData.address()?.streetAddress
             case cityTextField: cityTextField.text = fakeData.address()?.city
@@ -313,7 +318,7 @@ extension ViewController: UITextFieldDelegate {
             let lastIndex = textFieldsCollection.count - 1
             
             if nextIndex <= lastIndex {
-                // Go to next text field
+                // Go to the next text field
                 textFieldsCollection[nextIndex].becomeFirstResponder()
             } else {
                 // Dismiss the keyboard

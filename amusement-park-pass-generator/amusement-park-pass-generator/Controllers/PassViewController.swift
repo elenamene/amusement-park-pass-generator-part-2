@@ -19,7 +19,7 @@ class PassViewController: UIViewController {
     @IBOutlet weak var testResultLabel: UILabel!
     @IBOutlet weak var testResultView: UIView!
     @IBOutlet weak var birthdayLabel: UILabel!
-    
+    @IBOutlet weak var companyOrProjectLabel: UILabel!
     
     // MARK: - Properties
     
@@ -61,6 +61,19 @@ class PassViewController: UIViewController {
         entrantTypeLabel.text = pass.passHolder.entrantType.rawValue
         rideAccessLabel.text = pass.rideAccess.map { $0.rawValue }.joined(separator: ", ")
         discountLabel.text = pass.discount.description
+        companyOrProjectLabel.text = {
+            let text: String
+            
+            if let entrant = entrant as? Vendor {
+                text = "Company: \(entrant.company.rawValue)"
+            } else if let entrant = entrant as? Contractor {
+                text = "Project: \(String(entrant.projectNumber.rawValue))"
+            } else {
+                text = ""
+            }
+            
+            return text
+        }()
     }
     
     func displayBirthdayMessage() {
@@ -78,6 +91,11 @@ class PassViewController: UIViewController {
         soundEffectsPlayer.playSound(for: validation)
     }
     
+    func updateButton(for validation: AccessValidation, button: UIButton) {
+        button.setImage(validation.image(), for: .normal)
+        button.tintColor = validation.color()
+    }
+    
     // MARK: - Actions
 
     @IBAction func testAccessRestrictedAreas(_ sender: UIButton) {
@@ -85,6 +103,7 @@ class PassViewController: UIViewController {
         
         let result = entrant.swipePass(atRestrictedArea: area)
         updateResultArea(for: result.validation)
+        updateButton(for: result.validation, button: sender)
         
         if result.isBirthday == true {
             displayBirthdayMessage()
@@ -97,6 +116,7 @@ class PassViewController: UIViewController {
         do {
             let result = try entrant.swipePassAtRide(accessType: rideAccess)
             updateResultArea(for: result.validation)
+            updateButton(for: result.validation, button: sender)
             
             if result.isBirthday == true {
                 displayBirthdayMessage()
@@ -117,6 +137,7 @@ class PassViewController: UIViewController {
         
         let result = entrant.swipePassAtCashRegister()
         updateResultArea(for: result.validation)
+        updateButton(for: result.validation, button: sender)
         
         // Add discount description
         if let discountDescription = entrant.accessPass?.discount.description {
