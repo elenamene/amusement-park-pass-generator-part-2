@@ -37,3 +37,6 @@ Passes need to be tested for rules such as:
 ### Personal Enhancements
 
 * Adaptive UI for both portrait and landscape mode
+* Validation for corret zip code and street name format
+* Buttons for access validation dispaly a "✓" or "✕" icon depending on access test result
+* Added birthday message if entrant swipe on her/his birthday
