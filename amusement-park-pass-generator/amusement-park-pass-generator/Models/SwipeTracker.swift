@@ -8,14 +8,9 @@
 
 import Foundation
 
-//
-//    func isTodayBirthday() -> Bool {
-//        if let dateOfBirth = self.dateOfBirth, dateOfBirth.isSameDayAndMonthOfToday() {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
+enum SwipeError: String, Error {
+    case doubleSwiping = "Double Swiping Is Not Permitted"
+}
 
 struct SwipeTracker {
     static func hasEntrantSwipedDouble(entrant: Entrant) -> Bool {
@@ -26,8 +21,10 @@ struct SwipeTracker {
             let timeIntervalSinceLastSwipe = Int(currentSwipeTime.timeIntervalSince(lastSwipe))
             
             if timeIntervalSinceLastSwipe > 5 {
+                entrant.accessPass?.lastSwipe = currentSwipeTime
                 return false
             } else {
+                entrant.accessPass?.lastSwipe = currentSwipeTime
                 return true
             }
             

@@ -83,11 +83,11 @@ class ViewController: UIViewController {
             switch self.selectedType {
             case .classicGuest, .vipGuest: textFieldsCollection = []
             case .freeChildGuest: textFieldsCollection = ageableTextFields
-            case .seasonPassGuest: textFieldsCollection = namebleTextFields + addressableTextFields + ageableTextFields
-            case .seniorGuest: textFieldsCollection = namebleTextFields + ageableTextFields
-            case .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .hourlyEmployeeMaintenance, .shiftManager, .generalManager, .seniorManager: textFieldsCollection = namebleTextFields + addressableTextFields + ageableTextFields + ssnIdentifiableTextFields
-            case .contractor: textFieldsCollection = namebleTextFields + addressableTextFields + ageableTextFields + ssnIdentifiableTextFields + projectIdentifiableTextFields
-            case .vendor: textFieldsCollection = namebleTextFields + ageableTextFields + vendorTrackableTextFields
+            case .seasonPassGuest: textFieldsCollection = ageableTextFields + namebleTextFields + addressableTextFields
+            case .seniorGuest: textFieldsCollection = ageableTextFields + namebleTextFields
+            case .hourlyEmployeeFoodServices, .hourlyEmployeeRideServices, .hourlyEmployeeMaintenance, .shiftManager, .generalManager, .seniorManager: textFieldsCollection = ageableTextFields + ssnIdentifiableTextFields + namebleTextFields + addressableTextFields
+            case .contractor: textFieldsCollection = ageableTextFields + ssnIdentifiableTextFields + projectIdentifiableTextFields + namebleTextFields + addressableTextFields
+            case .vendor: textFieldsCollection = ageableTextFields + namebleTextFields + vendorTrackableTextFields
             }
             
             textFieldsCollection.enableAll()
@@ -210,20 +210,28 @@ class ViewController: UIViewController {
             }
         }
     }
-
-    // MARK: - Actions
     
+    // MARK: - UIDatePicker
+    
+    // Dismiss date picker when tapping outside the view
     @objc func backgroundTapGesture(recognizer: UITapGestureRecognizer) {
         dateOfBirthTextField.resignFirstResponder()
+        
+        // Check if date of birth is the only text field
+        if textFieldsCollection.count == 1 {
+            generatePassButton.isEnabled = true
+        }
     }
     
+    // Update text field with date selected
     @objc func dateChanged(datePicker: UIDatePicker) {
         dateOfBirthTextField.text = datePicker.date.stringDate
     }
+
+    // MARK: - Actions
     
     @objc func selectEntrantType(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
-        print("Selected entrant type: \(title)")
         
         subMenuButtonsCollection.deselectAll(apartFrom: sender)
         
@@ -254,7 +262,6 @@ class ViewController: UIViewController {
    
     @IBAction func showSubMenu(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
-        print("Pressed: Show sub menu for \(title)")
         
         // Select button pressed
         topLevelMenuButtonCollection.deselectAll(apartFrom: sender)
@@ -263,6 +270,7 @@ class ViewController: UIViewController {
         buttonsStackView.removeAllArrangedSubviews()
         textFieldsCollection.disableAll()
         populateDataButton.isEnabled = false
+        generatePassButton.isEnabled = false
         
         // Create new button for stack view
         switch title {
@@ -289,29 +297,33 @@ class ViewController: UIViewController {
             default: break
             }
         }
+        
+        generatePassButton.isEnabled = true
     }
     
 }
 
-// MARK: - Conform to Textfield Delegate
+// MARK: - Textfield Delegate
 
 extension ViewController: UITextFieldDelegate {
-    // Get rid of the keyboard
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Dismiss keyboard
-        // -> make the next text field the first responder
-        // with for-in loop array?
-//        switch textField {
-//        case firstNameTextField:
-//            lastNameTextField.becomeFirstResponder()
-//        case lastNameTextField:
-//            passwordTextField.becomeFirstResponder()
-//        case passwordTextField:
-//            emailTextField.becomeFirstResponder()
-//        default:
-//            emailTextField.resignFirstResponder()
-//        }
-        textField.resignFirstResponder()
+        if let index = textFieldsCollection.firstIndex(of: textField) {
+            let nextIndex = index + 1
+            let lastIndex = textFieldsCollection.count - 1
+            
+            if nextIndex <= lastIndex {
+                // Go to next text field
+                textFieldsCollection[nextIndex].becomeFirstResponder()
+            } else {
+                // Dismiss the keyboard
+                textField.resignFirstResponder()
+            }
+        }
+        
+        if textFieldsCollection.areAllTextFieldsFilled() {
+            generatePassButton.isEnabled = true
+        }
         
         return true
     }

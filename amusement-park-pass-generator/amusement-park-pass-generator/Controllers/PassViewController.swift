@@ -17,11 +17,26 @@ class PassViewController: UIViewController {
     @IBOutlet weak var rideAccessLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var testResultLabel: UILabel!
+    @IBOutlet weak var testResultView: UIView!
+    @IBOutlet weak var birthdayLabel: UILabel!
     
     
     // MARK: - Properties
     
     var entrant: Entrant?
+    let soundEffectsPlayer = SoundEffectsPlayer()
+    
+    lazy var name: String = {
+        var name: String
+        if let entrant = entrant as? Nameable {
+            name = entrant.firstName + " " + entrant.lastName
+        } else {
+            let hashValue = Int.random(in: 1...10000000000)
+            name = "Guest \(hashValue)"
+        }
+        
+        return name
+    }()
     
     // MARK: - View Lifecycle Methods
     
@@ -31,12 +46,88 @@ class PassViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        birthdayLabel.isHidden = true
+       
         setNeedsStatusBarAppearanceUpdate()
+        updatePassLabels()
+    }
+    
+    // MARK: - Helpers
+    
+    func updatePassLabels() {
+        guard let pass = entrant?.accessPass else { return }
+        
+        nameLabel.text = name
+        entrantTypeLabel.text = pass.passHolder.entrantType.rawValue
+        rideAccessLabel.text = pass.rideAccess.map { $0.rawValue }.joined(separator: ", ")
+        discountLabel.text = pass.discount.description
+    }
+    
+    func displayBirthdayMessage() {
+        if let ageableEntrant = entrant as? Ageable {
+            birthdayLabel.isHidden = false
+            birthdayLabel.text = Message.happyBirthday(ageableEntrant).text
+        }
+    }
+    
+    func updateResultArea(for validation: AccessValidation) {
+        testResultLabel.text = validation.rawValue
+        testResultView.backgroundColor = validation.color()
+        testResultLabel.isHighlighted = true
+        
+        soundEffectsPlayer.playSound(for: validation)
     }
     
     // MARK: - Actions
 
+    @IBAction func testAccessRestrictedAreas(_ sender: UIButton) {
+        guard let title = sender.currentTitle, let area = ParkArea(rawValue: title), let entrant = entrant else { return }
+        
+        let result = entrant.swipePass(atRestrictedArea: area)
+        updateResultArea(for: result.validation)
+        
+        if result.isBirthday == true {
+            displayBirthdayMessage()
+        }
+    }
+    
+    @IBAction func testAccessAllRides(_ sender: UIButton) {
+        guard let title = sender.currentTitle, let entrant = entrant, let rideAccess = RideAccess(rawValue: title) else { return }
+    
+        do {
+            let result = try entrant.swipePassAtRide(accessType: rideAccess)
+            updateResultArea(for: result.validation)
+            
+            if result.isBirthday == true {
+                displayBirthdayMessage()
+            }
+        } catch let error as SwipeError {
+            let alertController = UIAlertController(title: error.rawValue, message: Message.doubleSwiping(entrant).text, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(action)
+            
+            present(alertController, animated: true, completion: nil)
+        } catch {
+            fatalError("Unexpected error: \(error).")
+        }
+    }
+    
+    @IBAction func testDiscountAccess(_ sender: UIButton) {
+        guard let entrant = entrant else { return }
+        
+        let result = entrant.swipePassAtCashRegister()
+        updateResultArea(for: result.validation)
+        
+        // Add discount description
+        if let discountDescription = entrant.accessPass?.discount.description {
+            testResultLabel.text?.append(contentsOf: "\n\(discountDescription)")
+        }
+        
+        if result.isBirthday == true {
+            displayBirthdayMessage()
+        }
+    }
+    
     @IBAction func createNewPass(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - EntrantType
 
@@ -39,54 +40,89 @@ protocol Entrant {
 enum AccessValidation: String {
     case pass = "Access Permitted"
     case fail = "Access Denied"
+    
+    func color() -> UIColor {
+        switch self {
+        case .pass: return UIColor.myGreen
+        case .fail: return UIColor.myRed
+        }
+    }
+    
+    func soundName() -> (String) {
+        switch self {
+        case .pass: return "AccessGranted"
+        case .fail: return "AccessDenied"
+        }
+    }
 }
 
 extension Entrant {
-    func swipePass(atRestrictedArea area: ParkArea) -> AccessValidation {
+    func swipePass(atRestrictedArea area: ParkArea) -> (validation: AccessValidation, isBirthday: Bool?) {
+        let isBirthday: Bool
+        let validation: AccessValidation
         
         // Check for birthday
         if let entrant = self as? Ageable, entrant.isTodayBirthday() {
-            print(Message.happyBirthday(entrant).text)
+            isBirthday = true
+        } else {
+            isBirthday = false
         }
         
         // Check for access permission
         if let pass = self.accessPass, pass.areasPermitted.contains(area) {
-            print(AccessValidation.pass.rawValue)
-            return AccessValidation.pass
+           validation = .pass
         } else {
-            print(AccessValidation.fail.rawValue)
-            return AccessValidation.fail
+            validation = .fail
         }
+        
+        return (validation, isBirthday)
     }
     
-    func swipePassAtRide() -> [RideAccess]? {
-        guard let pass = self.accessPass else { return nil }
+    func swipePassAtRide(accessType: RideAccess) throws -> (validation: AccessValidation, isBirthday: Bool?) {
+        let isBirthday: Bool
+        let validation: AccessValidation
         
         // Check for birthday
         if let entrant = self as? Ageable, entrant.isTodayBirthday() {
-            print(Message.happyBirthday(entrant).text)
+            isBirthday = true
+        } else {
+            isBirthday = false
         }
-        
+     
         // Check for double swiping
         if SwipeTracker.hasEntrantSwipedDouble(entrant: self) {
-            print(Message.doubleSwiping(self).text)
-            return nil
+            throw SwipeError.doubleSwiping
         }
         
-        print("Ride access: \(pass.rideAccess.map { $0.rawValue })")
+        // Check for access ride priviledges
+        if let pass = self.accessPass, pass.rideAccess.contains(accessType) {
+            validation = .pass
+        } else {
+            validation = .fail
+        }
         
-        return pass.rideAccess
+         return (validation, isBirthday)
     }
     
-    func swipePassAtCashRegister() {
-        guard let pass = self.accessPass else { return }
+    func swipePassAtCashRegister() -> (validation: AccessValidation, isBirthday: Bool?) {
+        let isBirthday: Bool
+        let validation: AccessValidation
         
         // Check for birthday
         if let entrant = self as? Ageable, entrant.isTodayBirthday() {
-            print(Message.happyBirthday(entrant).text)
+            isBirthday = true
+        } else {
+            isBirthday = false
         }
         
-        print(pass.discount.description)
+        // Check for discounts
+        if let pass = self.accessPass, pass.discount.food == 0 && pass.discount.merchandise == 0 {
+            validation = .fail
+        } else {
+            validation = .pass
+        }
+        
+        return (validation, isBirthday)
     }
 }
 

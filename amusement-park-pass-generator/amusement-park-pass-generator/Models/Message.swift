@@ -50,11 +50,11 @@ extension Message {
         if let pass = entrant.accessPass, let lastSwipeTime = pass.lastSwipe {
             return """
             We have recorded a swipe at \(lastSwipeTime).
-            Double swiping is not permitted. Please contact an assitant.
+            \nPlease contact an assitant.
             """
         } else {
             return """
-            Double swiping is not permitted. Please contact an assitant.
+            Please contact an assitant.
             """
         }
     }

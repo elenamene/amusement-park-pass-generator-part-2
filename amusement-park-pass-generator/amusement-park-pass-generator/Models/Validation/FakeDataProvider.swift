@@ -35,7 +35,7 @@ struct FakeDataProvider {
     }
     
     func date() -> String? {
-        let dates = ["05/22/2010", "01/07/1982", "03/21/1986", "04/29/1995", "11/17/1964"]
+        let dates = ["05/22/2018", "01/07/1982", "03/21/1986", "04/29/1995", "11/17/1964"]
         guard let randomDate = dates.randomElement() else { return nil }
         
         return randomDate

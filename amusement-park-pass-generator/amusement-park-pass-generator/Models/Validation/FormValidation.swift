@@ -9,21 +9,21 @@
 import Foundation
 
 enum FormError: String, Error {
-    case invalidFirstName = "Please insert your first name."
-    case invalidLastName = "Please insert your last name."
-    case invalidStreetAddress = "Please insert your address."
-    case invalidCity = "Please insert your City."
-    case invalidState = "Please insert your State."
-    case invalidZipCode = "Please insert your Zip Code."
-    case invalidDateOfBirth = "Please insert your date of birth."
-    case invalidSocialSecurityNumber = "Please insert your Social Security Number."
+    case invalidFirstName = "Please insert a valid first name."
+    case invalidLastName = "Please insert a valid last name."
+    case invalidStreetAddress = "Please insert a valid address."
+    case invalidCity = "Please insert a valid City."
+    case invalidState = "Please insert a valid State."
+    case invalidZipCode = "Please insert a valid Zip Code."
+    case invalidDateOfBirth = "Please insert a valid date of birth."
+    case invalidSocialSecurityNumber = "Please insert a valid Social Security Number."
     case invalidAge = "Free child guest must be under 5 years old. Please select Classic Guest."
     case invalidProjectNumber = "Please insert a valid project number"
     case invalidVendorCompany = "Please insert a valid company name"
 }
 
 struct FormValidation {
-    static let zipRegex = "(^[0-9]{5}(-[87)?$)"
+    static let zipRegex = "(^[0-9]{5}(-[87])?$)"
     static let streetRegex = #"\d{1,4} [\w\s]{1,20}(?:street|st|avenue|ave|road|rd|highway|hwy|lane|square|sq|trail|trl|drive|dr|court|ct|park|parkway|pkwy|circle|cir|boulevard|blvd)\W?"#
     static let ssnRegex = "^\\d{3}-\\d{2}-\\d{4}$"
 
@@ -86,8 +86,8 @@ struct FormValidation {
     }
 
     static func companyName(_ input: String) throws -> VendorCompany {
-        guard let name = VendorCompany(rawValue: input.lowercased()) else {
-            throw FormError.invalidProjectNumber
+        guard let name = VendorCompany(rawValue: input) else {
+            throw FormError.invalidVendorCompany
         }
         
         return name

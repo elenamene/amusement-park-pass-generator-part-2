@@ -28,3 +28,9 @@ extension Sequence where Element: UIControl {
         }
     }
 }
+
+extension Sequence where Element: UITextField {
+    func areAllTextFieldsFilled() -> Bool {
+        return self.filter { $0.text == "" }.isEmpty
+    }
+}

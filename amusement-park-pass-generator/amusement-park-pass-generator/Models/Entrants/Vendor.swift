@@ -9,10 +9,10 @@
 import Foundation
 
 enum VendorCompany: String {
-    case acme
-    case orkin
-    case fedex
-    case nwElectrical
+    case acme = "Acme"
+    case orkin = "Orkin"
+    case fedex = "Fedex"
+    case nwElectrical = "NW Electrical"
 }
 
 class Vendor: Nameable, Ageable, VendorTrackable {

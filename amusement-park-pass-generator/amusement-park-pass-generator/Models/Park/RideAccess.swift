@@ -7,6 +7,6 @@
 //
 
 enum RideAccess: String {
-    case accessAllRides = "Access all rides"
-    case skipAllRidesLines = "Skip all rides lines"
+    case accessAllRides = "Access All Rides"
+    case skipAllRidesLines = "Skip All Ride Lines"
 }
