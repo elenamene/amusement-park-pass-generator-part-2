@@ -2,9 +2,11 @@
 
 ## iOS Techdegree Project 5
 
-You will now take the foundation you created in Project 4 (Amusement Park Generator (I)) and add the User Interface for the app, along with a short list of new features and entrant types handling. You might need to refactor some code in order to accommodate these changes.
-
 The app can take user input and create personalized entrant passes for all the entrant types. When the passes are being swiped at different locations in the park, business rules such as whether the entrant is allowed to access an area, whether the entrant can get a discount, will be tested.
+
+<img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/form.png" height="959" width="731">
+<img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/permitted.png" height="959" width="731">
+<img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/denied.png" height="959" width="731">
 
 ### Required Tasks
 
