@@ -8,8 +8,6 @@
 
 import Foundation
 
-// Date extension to calculate age
-
 extension Date {
     var age: Int? {
         let now = Date()
