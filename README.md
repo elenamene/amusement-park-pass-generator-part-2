@@ -4,13 +4,20 @@
 
 The app can take user input and create personalized entrant passes for all the entrant types. When the passes are being swiped at different locations in the park, business rules such as whether the entrant is allowed to access an area, whether the entrant can get a discount, will be tested.
 
+Use of: 
+* Autolayout
+* Data Modelling
+* Protocol Composition
+* Polymorphic Methods
+* UITextField Input Validation
+
 <img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/form.png" height="959" width="731">
 <img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/permitted.png" height="959" width="731">
 <img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/denied.png" height="959" width="731">
 
 ### Required Tasks
 
-1. Construct an iPad user-interface as per the screenshots in the project mockup. As mentioned in the Onward and Upward Instruction Video, the UI elements such as entry boxes and labels need to be enabled/disabled (or made visible/hidden) depending on the entrant type the user selects.
+1. Construct an iPad user-interface as per the screenshots in the project mockup. The UI elements such as entry boxes and labels need to be enabled/disabled (or made visible/hidden) depending on the entrant type the user selects.
 
 2. Utilize the code created in Project 4 as the business logic foundation for the user interface. You may need to refactor, enhance or rewrite some of the code from Project 4 in order to satisfy the expanded requirements for this project, which are detailed in the Business Rules Matrix and the Entrant Access Rules documents.
 
@@ -32,7 +39,9 @@ Passes need to be tested for rules such as:
 
 ### Extra Credit
 
-* Add additional input validation to ensure that phone numbers and zip codes are all numerical, birthday is of the correct format (MM/DD/YYYY) and that all text entries are of “reasonable” length. You can decide what you deem reasonable, and put it in the relevant comment in the code. You will only be graded on the implementation. An alert needs to be generated to notify the user that there is an invalid input.
+* Add additional input validation to ensure that phone numbers and zip codes are all numerical, birthday is of the correct format (MM/DD/YYYY) and that all text entries are of “reasonable” length. An alert needs to be generated to notify the user that there is an invalid input.
+
+* Entrants are prevented from swiping twice within 5 seconds at the same checkpoint
 
 * Add a feature to the swipe method(s), so that a “ding” sound is played when an entrant is granted access and a “buzz” sound is played when an entrant is denied access.
 
