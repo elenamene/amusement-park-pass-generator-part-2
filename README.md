@@ -10,6 +10,7 @@ Use of:
 * Protocol Composition
 * Polymorphic Methods
 * UITextField Input Validation
+* Unit Testing
 
 <img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/form.png" height="959" width="731">
 <img src="https://github.com/elenamene/amusement-park-pass-generator-part-2/blob/master/permitted.png" height="959" width="731">
